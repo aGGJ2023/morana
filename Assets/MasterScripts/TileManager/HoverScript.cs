@@ -28,6 +28,10 @@ namespace MasterScripts
                 overlayTilemap.SetTile(cellPos, tile);
                 _lastCellPos = cellPos;
             }
+            else
+            {
+                _lastCellPos = new Vector3Int(0, 0, -1);
+            }
         }
 
         private bool CanHoverAt(Vector3Int cellPos)

@@ -12,6 +12,7 @@ public class TilePlacerGameObjects : MonoBehaviour
 
     [SerializeField] GameObject TileObject;
     [SerializeField] Transform parent;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -19,8 +20,8 @@ public class TilePlacerGameObjects : MonoBehaviour
             Tilemap collisionMap = TileManager.Instance.collisionMap;
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            Vector3 worldPosWithCorrectZ = new Vector3(worldPos.x, worldPos.y, 0f);
             Vector3Int cellPos = collisionMap.WorldToCell(worldPos);
+            Vector3 worldPosWithCorrectZ = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0f);
             TileBase tile = collisionMap.GetTile(cellPos);
 
             if (!adhereToPlaceRules | CanPlaceAt(cellPos))
@@ -28,8 +29,6 @@ public class TilePlacerGameObjects : MonoBehaviour
                 TileManager.Instance.chunk.SetValue(cellPos, 1);
                 Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
             }
-                   
-
         }
     }
 
@@ -41,15 +40,13 @@ public class TilePlacerGameObjects : MonoBehaviour
 
         // returns true if current tile has valid neighbors
         for (int x = -1; x < 2; x++)
-            for (int y = -1; y < 2; y++)
-                if (!TileManager.Instance.collisionMap.GetTile(new Vector3Int(
-                        cellPos.x + x,
-                        cellPos.y + y
-                    )).IsUnityNull())
-                    return true;
+        for (int y = -1; y < 2; y++)
+            if (!TileManager.Instance.collisionMap.GetTile(new Vector3Int(
+                    cellPos.x + x,
+                    cellPos.y + y
+                )).IsUnityNull())
+                return true;
 
         return false;
     }
-
-
 }
