@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     //if data isnt set this is default data
     [SerializeField]
-    private int damage;
+    private int damage = 1;
     [SerializeField]
     private float speed;
     [SerializeField]
@@ -27,7 +27,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         // add root tag in editor
-        root = GameObject.FindGameObjectWithTag(targetTag); //targetTag.ToString
+        root = GameObject.FindGameObjectWithTag(targetTag);
+        SetEnemyValues();
     }
 
     // Update is called once per frame
@@ -40,11 +41,23 @@ public class Enemy : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, root.transform.position, speed * Time.deltaTime);
     }
+    private void SetEnemyValues()
+    {
+        GetComponent<Health>().SetHealth(data.hp, data.hp);
+        damage = data.damage;
+        speed = data.speed;
+    }
+
+
     private void OnTriggerEnter2D(Collider2D collider) 
     {
         if (collider.CompareTag(targetTag)) //targetTag.ToString()
         {
             //damage root
+            if (collider.GetComponent<Health>() != null)
+            {
+                collider.GetComponent<Health>().Damage(damage);
+            }
         }
     }
 }
