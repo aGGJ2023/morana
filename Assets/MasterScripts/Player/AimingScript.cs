@@ -5,7 +5,7 @@ using UnityEngine;
 public class AimingScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+
     [SerializeField] private Transform center;
 
     [SerializeField] float rotationSpeed = 2f;
@@ -15,8 +15,8 @@ public class AimingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-         transform.RotateAround(center.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+
+        transform.RotateAround(center.position, Vector3.forward, rotationSpeed * Time.deltaTime);
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
@@ -26,10 +26,13 @@ public class AimingScript : MonoBehaviour
             setObjectToSpawn();
         }
         // aimingDot.Rotate((Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse Y") * RotationSpeed * Time.deltaTime), 0, Space.World);
-       // transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position) * Quaternion.Euler(0, 0, 90);
+        // transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position) * Quaternion.Euler(0, 0, 90);
     }
     public void setObjectToSpawn()
     {
-        Instantiate(objectToSpawn, spawnPosition.position,Quaternion.identity);
+        if (objectToSpawn !=null)
+        {
+            Instantiate(objectToSpawn, spawnPosition.position, Quaternion.identity);
+        }
     }
 }
