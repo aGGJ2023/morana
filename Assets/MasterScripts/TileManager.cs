@@ -1,17 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace MasterScripts
 {
-    public class GameManager : MonoBehaviour
+    public class TileManager : MonoBehaviour
     {
-        public static GameManager Instance;
-        //public Player player;
-        //public FloatingTextManager floatingTextManager;
+        public static TileManager Instance;
+        public Tilemap collisionMap;
+        public Tile rootTile;
+        public Tile sourceTile;
+        public Tile endpointTile;
+        public TileChunk chunk =
+            new TileChunk(18, 10, 0, 0);
 
         void Awake()
         {
@@ -23,6 +26,11 @@ namespace MasterScripts
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Update()
+        {
+            chunk.RunUpdate();
         }
     }
 }
