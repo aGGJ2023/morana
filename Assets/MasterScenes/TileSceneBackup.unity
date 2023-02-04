@@ -1047,6 +1047,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adhereToPlaceRules: 1
+  TileObject: {fileID: 0}
+  parent: {fileID: 0}
 --- !u!114 &414934583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,7 +1245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150832053742237964, guid: 436c646d400196a4a8e8551ca5ec98cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.93
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 4150832053742237964, guid: 436c646d400196a4a8e8551ca5ec98cf, type: 3}
       propertyPath: m_LocalPosition.y

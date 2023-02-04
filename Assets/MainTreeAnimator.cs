@@ -21,6 +21,5 @@ public class MainTreeAnimator : MonoBehaviour
             spriteRenderer.sprite = treeStateSprites[index];
 
         }
-        // spriteRenderer .sprite= treeStateSprites.f
     }
 }
