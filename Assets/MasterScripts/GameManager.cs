@@ -10,6 +10,7 @@ namespace MasterScripts
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+        public GameObject Seed;
 
 
         void Awake()
@@ -22,6 +23,11 @@ namespace MasterScripts
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        public Vector3 GetSeedLocation()
+        {
+            return Seed.transform.position;
         }
 
     }

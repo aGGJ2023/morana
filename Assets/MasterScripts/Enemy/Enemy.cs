@@ -1,13 +1,18 @@
+using MasterScripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class Enemy : MonoBehaviour
 {
-    private const string ROOT_TAG = "Root";
+    [SerializeField]
+    private string TARGET_TAG = "Tile";
+    [SerializeField]
+    private string PLAYER_TAG = "Player";
 
     //if data isnt set this is default data
     [SerializeField]
@@ -18,50 +23,83 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float speed = 1.5f;
     [SerializeField]
-    public string targetTag = ROOT_TAG;
-
-    [SerializeField]
     private EnemyData data;
 
-    private GameObject root;
-
+    private bool isColliding = false;
+    private GameObject target;
 
     // Start is called before the first frame update
     void Start()
     {
-        // add root tag in editor
-        root = GameObject.FindGameObjectWithTag(targetTag);
+        target = FindTarget();
         SetEnemyValues();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveToRoot();
+        if (!isColliding)
+            MoveToTarget();
     }
 
-    private void MoveToRoot() 
+    private void MoveToTarget() 
     {
-        transform.position = Vector2.MoveTowards(transform.position, root.transform.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
     private void SetEnemyValues()
     {
-        //GetComponent<Health>().SetHealth(hp, hp);
         GetComponent<Health>().SetHealth(data.hp, data.hp);
         damage = data.damage;
         speed = data.speed;
     }
 
+    private GameObject FindTarget()
+    {
+        var marks = GameObject.FindGameObjectsWithTag(TARGET_TAG);
+        if (marks.Length == 0)
+        {
+            return GameObject.FindGameObjectWithTag(PLAYER_TAG);
+        }
+        var nearest = marks[0];
+        var distance = Vector2.Distance(transform.position, nearest.transform.position);
+        foreach (var mark in marks)
+        {
+            var currDistance = Vector2.Distance(transform.position, mark.transform.position);
+            if (currDistance < distance && EnemyManager.Instance.ContainsTarget(mark) == false)
+            {
+                nearest = mark;
+                distance = currDistance;
+            }
+        }
+
+        EnemyManager.Instance.AddTarget(nearest);
+
+        return nearest;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collided");
+        if (collision.gameObject.CompareTag(TARGET_TAG))
+        {
+        Debug.Log("Should start destroying tile");
+            collision.gameObject.GetComponent<TileDestroyHandler>().AttackStarted();
+        } 
+        isColliding = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TARGET_TAG))      
+            collision.gameObject.GetComponent<TileDestroyHandler>().AttackStopped();
+        isColliding = false;
+    }
 
     private void OnTriggerEnter2D(Collider2D collider) 
     {
-        if (collider.CompareTag(targetTag)) //targetTag.ToString()
+        if (collider.GetComponent<Health>() != null)
         {
-            //damage root
-            if (collider.GetComponent<Health>() != null)
-            {
-                collider.GetComponent<Health>().Damage(damage);
-            }
+            collider.GetComponent<Health>().Damage(damage);
         }
     }
 }
