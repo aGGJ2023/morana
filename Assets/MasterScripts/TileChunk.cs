@@ -19,6 +19,21 @@ namespace MasterScripts
             int width,
             int height,
             int chunkOffsetWidth,
+            int chunkOffsetHeight,
+            bool placeCenterSource
+        ) : this(width, height, chunkOffsetWidth, chunkOffsetHeight)
+        {
+            this._tileData[_width + _widthOffset, _height + _heightOffset] = 2;
+            this._tileData[_width + _widthOffset - 1, _height + _heightOffset] = 2;
+            this._tileData[_width + _widthOffset, _height + _heightOffset - 1] = 2;
+            this._tileData[_width + _widthOffset - 1, _height + _heightOffset - 1] = 2;
+        }
+
+
+        public TileChunk(
+            int width,
+            int height,
+            int chunkOffsetWidth,
             int chunkOffsetHeight
         )
         {
@@ -28,7 +43,7 @@ namespace MasterScripts
             this._heightOffset = -height / 2;
             this._chunkOffsetWidth = chunkOffsetWidth;
             this._chunkOffsetHeight = chunkOffsetHeight;
-            
+
             this._tileData = new int[width, height];
         }
 
@@ -67,6 +82,9 @@ namespace MasterScripts
                     // TODO: implement queue to avoid needless SetTile calls
                     TileManager.Instance.collisionMap.SetTile(
                         GetPosition(i, j), TileManager.Instance.rootTile);
+                else if (_tileData[i, j] == 2)
+                    TileManager.Instance.collisionMap.SetTile(
+                        GetPosition(i, j), TileManager.Instance.sourceTile);
         }
     }
 }

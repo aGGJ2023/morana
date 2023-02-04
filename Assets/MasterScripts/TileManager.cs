@@ -13,8 +13,7 @@ namespace MasterScripts
         public Tile rootTile;
         public Tile sourceTile;
         public Tile endpointTile;
-        public TileChunk chunk =
-            new TileChunk(18, 10, 0, 0);
+        public TileChunk chunk = new(18, 10, 0, 0, true);
 
         void Awake()
         {
