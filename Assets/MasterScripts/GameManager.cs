@@ -10,7 +10,7 @@ namespace MasterScripts
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-
+        public GameObject player;
 
         void Awake()
         {
@@ -23,6 +23,5 @@ namespace MasterScripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
     }
 }

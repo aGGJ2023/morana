@@ -14,7 +14,8 @@ namespace MasterScripts
         public Tile sourceTile;
         public Tile endpointTile;
         public TileChunk chunk = new(18, 10, 0, 0, true);
-
+        public float maxDistance = 7f;
+        
         void Awake()
         {
             if (Instance != null)

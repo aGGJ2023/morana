@@ -38,6 +38,15 @@ public class TilePlacerGameObjects : MonoBehaviour
         if (!TileManager.Instance.collisionMap.GetTile(cellPos).IsUnityNull())
             return false;
 
+        Vector3 tilePosition = TileManager.Instance.collisionMap.CellToWorld(cellPos);
+        Vector3 tileCenter = new Vector3(tilePosition.x + 0.5f, tilePosition.y + 0.5f, tilePosition.z);
+        Vector3 playerPosition = GameManager.Instance.player.transform.position;
+
+        // returns false when the player is too far away
+        if (Vector3.Distance(tileCenter,playerPosition) 
+            > TileManager.Instance.maxDistance)
+            return false;
+        
         // returns true if current tile has valid neighbors
         for (int x = -1; x < 2; x++)
         for (int y = -1; y < 2; y++)
