@@ -6,7 +6,7 @@ public class AimingScript : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    [SerializeField] private Transform centre;
+    [SerializeField] private Transform center;
 
     [SerializeField] float rotationSpeed = 2f;
     [SerializeField] GameObject objectToSpawn;
@@ -16,7 +16,7 @@ public class AimingScript : MonoBehaviour
     void Update()
     {
         
-         transform.RotateAround(centre.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+         transform.RotateAround(center.position, Vector3.forward, rotationSpeed * Time.deltaTime);
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);

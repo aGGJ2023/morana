@@ -11,9 +11,12 @@ public class Enemy : MonoBehaviour
 
     //if data isnt set this is default data
     [SerializeField]
-    private int damage = 1;
+    public int hp = 100;
+
     [SerializeField]
-    private float speed;
+    private int damage = 15;
+    [SerializeField]
+    private float speed = 1.5f;
     [SerializeField]
     public string targetTag = ROOT_TAG;
 
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
     }
     private void SetEnemyValues()
     {
+        //GetComponent<Health>().SetHealth(hp, hp);
         GetComponent<Health>().SetHealth(data.hp, data.hp);
         damage = data.damage;
         speed = data.speed;
