@@ -11,7 +11,7 @@ namespace MasterScripts
     {
         public static GameManager Instance;
         public GameObject Seed;
-
+        public GameObject player;
 
         void Awake()
         {

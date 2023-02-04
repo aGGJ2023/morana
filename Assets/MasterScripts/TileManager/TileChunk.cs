@@ -70,8 +70,13 @@ namespace MasterScripts
         public void SetValue(Vector3Int position, int value)
         {
             int[] index = GetIndex(position);
-            Debug.Log($"A: {index[0]}, B: {index[1]}, Position: {position}");
             _tileData[index[0], index[1]] = value;
+        }
+        
+        public int GetValue(Vector3Int position)
+        {
+            int[] index = GetIndex(position);
+            return _tileData[index[0], index[1]];
         }
 
         public void RunUpdate()
