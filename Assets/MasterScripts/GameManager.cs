@@ -10,8 +10,7 @@ namespace MasterScripts
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        //public Player player;
-        //public FloatingTextManager floatingTextManager;
+
 
         void Awake()
         {
@@ -24,5 +23,6 @@ namespace MasterScripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
     }
 }
