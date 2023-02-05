@@ -3,11 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class Enemy : MonoBehaviour
+public class SlowEnemy : MonoBehaviour
 {
     [SerializeField]
     private string TARGET_TAG = "Tile";
@@ -44,6 +45,9 @@ public class Enemy : MonoBehaviour
 
     private void MoveToTarget() 
     {
+        if (target.IsDestroyed())
+            target = FindTarget();
+
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
     private void SetEnemyValues()
@@ -79,18 +83,21 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collided");
         if (collision.gameObject.CompareTag(TARGET_TAG))
         {
-        Debug.Log("Should start destroying tile");
-            collision.gameObject.GetComponent<TileDestroyHandler>().AttackStarted();
+            var handler = collision.gameObject.GetComponent<TileDestroyHandler>();
+            if (handler != null)
+            {
+                handler.AttackStarted();
+            }       
         } 
         isColliding = true;
     }
 
-    private void OnCollisionExit(Collision collision)
+    // maybe unecessary
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(TARGET_TAG))      
+        if (collision.gameObject.CompareTag(TARGET_TAG))
             collision.gameObject.GetComponent<TileDestroyHandler>().AttackStopped();
         isColliding = false;
     }

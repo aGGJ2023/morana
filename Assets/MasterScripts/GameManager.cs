@@ -15,7 +15,7 @@ namespace MasterScripts
 
         void Awake()
         {
-            if (Instance != null)
+            if (Instance != null) 
             {
                 Destroy(gameObject);
                 return;
