@@ -10,11 +10,11 @@ public class ResCounter : MonoBehaviour
 
     private void Start()
     {
-        CounterText = GameObject.Find("");
+        CounterText = GameObject.Find("UI/Panel/ResCounterTxt").GetComponent<Text>();
     }
 
     private void Update()
     {
-        CounterText.text = GameManager.Instance.;
+        //CounterText.text = GameManager.Instance.;
     }
 }
