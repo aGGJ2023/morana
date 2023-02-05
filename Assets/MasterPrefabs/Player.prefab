@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4150832053334598455}
   - component: {fileID: 4150832053334598454}
-  - component: {fileID: 4998624391183304284}
+  - component: {fileID: 2008723453559769087}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4998624391183304284
+--- !u!95 &2008723453559769087
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b2e9bab12d7e0a749a9d5ee96c07bf4e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -117,11 +117,12 @@ GameObject:
   - component: {fileID: 4150832053742237964}
   - component: {fileID: 4150832053742237965}
   - component: {fileID: 4150832053742237967}
+  - component: {fileID: 5512085829815700484}
   - component: {fileID: 4150832053742237963}
   - component: {fileID: 8939598130498847376}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Root
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,7 +215,33 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &5512085829815700484
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150832053742237953}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.0114286, y: 3.2857144}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0114286, y: 3.2857144}
+  m_EdgeRadius: 0
 --- !u!114 &4150832053742237963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +270,9 @@ MonoBehaviour:
   checkPosition: {fileID: 4150832054146531770}
   checkRadious: 1
   EnemyTags:
-  - Root
-  animator: {fileID: 4998624391183304284}
+  - SlowEnemy
+  - FastEnemy
+  animator: {fileID: 3322096939005956662}
 --- !u!1 &4150832054146531771
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +414,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7183659996201441515}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b2e9bab12d7e0a749a9d5ee96c07bf4e, type: 2}
   m_CullingMode: 0

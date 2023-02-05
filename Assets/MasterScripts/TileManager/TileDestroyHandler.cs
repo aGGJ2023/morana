@@ -22,7 +22,7 @@ public class TileDestroyHandler : MonoBehaviour
 
     public void Update()
     {
-        if (lastAttacked != 0 && Time.time - lastAttacked > attackDuration)
+        if (lastAttacked != 0 && Time.time - lastAttacked > attackDuration) 
             DestroyTile();
     }
 

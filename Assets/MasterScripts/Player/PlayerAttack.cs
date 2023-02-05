@@ -6,8 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
     // Place this script inside attackEnemy position in Player prefab that needs a circle collider 
     [SerializeField] Transform checkPosition;
-    [SerializeField] float checkRadious=1;
-    [SerializeField] string[] EnemyTags = { "SlowEnemy", "FastEnemy" };
+    [SerializeField] float checkRadious=1;  
+    [SerializeField] string[] EnemyTags;
     [SerializeField] Animator animator;
     void Start()
     {

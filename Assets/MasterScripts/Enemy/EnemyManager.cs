@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private GameObject fastEnemy;
     [SerializeField]
-    private List<Transform> spawnLocations;
+    private List<GameObject> spawnLocations;
     [SerializeField]
     private int MaxSlowEnemyCount = 10; // should be modified according to number of tiles
     [SerializeField]
@@ -59,7 +59,7 @@ public class EnemyManager : MonoBehaviour
     {
 
         var index = Random.Range(0, spawnLocations.Count - 1);
-        Instantiate(enemy, spawnLocations[index].position, Quaternion.identity);
+        Instantiate(enemy, spawnLocations[index].transform.position, Quaternion.identity);
         slowEnemyCount++;
     }
 
@@ -72,6 +72,10 @@ public class EnemyManager : MonoBehaviour
 
     public void RemoveTarget(GameObject target)
         => targetedTiles.Remove(target);
-    
 
+    internal void DisableSpawnPoint(GameObject gameObject)
+        => spawnLocations.Remove(gameObject);
+
+    internal void EnableSpawnPoint(GameObject gameObject)
+        => spawnLocations.Add(gameObject);
 }

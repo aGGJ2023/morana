@@ -8,6 +8,7 @@ TagManager:
   - Tile
   - SlowEnemy
   - Seed
+  - FastEnemy
   layers:
   - Default
   - TransparentFX

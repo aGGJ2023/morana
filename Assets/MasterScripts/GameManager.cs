@@ -13,6 +13,11 @@ namespace MasterScripts
         public GameObject Seed;
         public GameObject player;
 
+        [SerializeField]
+        private int endpointsRequired = 4;
+
+        private int endpointsConnected = 0;
+
         void Awake()
         {
             if (Instance != null) 
@@ -25,10 +30,19 @@ namespace MasterScripts
           //  DontDestroyOnLoad(gameObject);
         }
 
-        public Vector3 GetSeedLocation()
+        public void EndpointConnected()
         {
-            return Seed.transform.position;
+            Debug.Log($"endpointsConnected: {endpointsConnected}");
+            endpointsConnected++;
+            if (endpointsConnected == endpointsRequired)
+            {
+                // Win 
+                Debug.Log("Win");
+            }
         }
+        public void EndpointDisconnected()
+        =>  endpointsConnected--;
+
 
     }
 }
