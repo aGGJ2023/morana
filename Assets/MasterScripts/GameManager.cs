@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 namespace MasterScripts
@@ -38,6 +39,7 @@ namespace MasterScripts
             {
                 Debug.Log("Win");
                 // TODO LOAD WIN SCENE
+                SceneManager.LoadScene("MainScene");
 
             }
         }

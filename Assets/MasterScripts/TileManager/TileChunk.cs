@@ -162,7 +162,7 @@ namespace MasterScripts
                         results.Add(GetPosition(i, j));
                     }
                 }
-            }
+            }   
 
             return results;
         }
