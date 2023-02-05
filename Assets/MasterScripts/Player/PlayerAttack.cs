@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float checkRadious=1;  
     [SerializeField] string[] EnemyTags;
     [SerializeField] Animator animator;
+    private bool attack = false;
     void Start()
     {
 
@@ -17,11 +18,18 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (attack == true)
+        {
+            animator.Play("No Attack");
+            attack = false;
+        }
         if (Input.GetMouseButtonDown(1))
         {
+            attack = true;
+            animator.Play("MoranaAttack");
             detectAttack();
-            animator.SetTrigger("Attack");
         }
+
     }
 
      void detectAttack()
@@ -41,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
 
         
         }
+
     }
     private void OnDrawGizmos()
     {
