@@ -25,10 +25,17 @@ namespace MasterScripts
             bool placeCenterSource
         ) : this(width, height, chunkOffsetWidth, chunkOffsetHeight)
         {
+            // Seed / Source Block
             this._tileData[_width + _widthOffset, _height + _heightOffset] = 2;
             this._tileData[_width + _widthOffset - 1, _height + _heightOffset] = 2;
             this._tileData[_width + _widthOffset, _height + _heightOffset - 1] = 2;
             this._tileData[_width + _widthOffset - 1, _height + _heightOffset - 1] = 2;
+
+            // Endpoints
+            SetValue(new Vector3Int(-10, -5, 0), 3);
+            SetValue(new Vector3Int(-8, 2, 0), 3);
+            SetValue(new Vector3Int(8, -5, 0), 3);
+            SetValue(new Vector3Int(9, 2, 0), 3);
         }
 
 
@@ -75,13 +82,13 @@ namespace MasterScripts
             int[] index = GetIndex(position);
             return _tileGameObject[index[0], index[1]];
         }
-        
+
         public void SetGameObject(Vector3Int position, GameObject value)
         {
             int[] index = GetIndex(position);
             _tileGameObject[index[0], index[1]] = value;
         }
-        
+
         public void SetValue(Vector3Int position, int value)
         {
             int[] index = GetIndex(position);
@@ -105,6 +112,9 @@ namespace MasterScripts
                 else if (_tileData[i, j] == 2)
                     TileManager.Instance.collisionMap.SetTile(
                         GetPosition(i, j), TileManager.Instance.sourceTile);
+                else if (_tileData[i, j] == 3)
+                    TileManager.Instance.collisionMap.SetTile(
+                        GetPosition(i, j), TileManager.Instance.endpointTile);
                 else
                     TileManager.Instance.collisionMap.SetTile(
                         GetPosition(i, j), null);
@@ -115,30 +125,40 @@ namespace MasterScripts
         void DFS(int x, int y)
         {
             visited[x, y] = true;
-            for (int i = -1; i <= 1; i++) {
-                for (int j = -1; j <= 1; j++) {
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
                     if (i == 0 && j == 0) continue;
                     int nx = x + i;
                     int ny = y + j;
-                    if (nx >= 0 && nx < _width && ny >= 0 && ny < _height && _tileData[nx, ny] == 1 && !visited[nx, ny]) {
+                    if (nx >= 0 && nx < _width && ny >= 0 && ny < _height && _tileData[nx, ny] == 1 && !visited[nx, ny])
+                    {
                         DFS(nx, ny);
                     }
                 }
             }
         }
 
-        public List<Vector3Int> GetUnconnectedTiles() {
+        public List<Vector3Int> GetUnconnectedTiles()
+        {
             List<Vector3Int> results = new List<Vector3Int>();
             visited = new bool[_width, _height];
-            for (int i = 0; i < _width; i++) {
-                for (int j = 0; j < _height; j++) {
+            for (int i = 0; i < _width; i++)
+            {
+                for (int j = 0; j < _height; j++)
+                {
                     visited[i, j] = false;
                 }
             }
+
             DFS(_width / 2, _height / 2);
-            for (int i = 0; i < _width; i++) {
-                for (int j = 0; j < _height; j++) {
-                    if (!visited[i, j] && _tileData[i, j] > 0 ){
+            for (int i = 0; i < _width; i++)
+            {
+                for (int j = 0; j < _height; j++)
+                {
+                    if (!visited[i, j] && _tileData[i, j] > 0)
+                    {
                         results.Add(GetPosition(i, j));
                     }
                 }
@@ -146,6 +166,5 @@ namespace MasterScripts
 
             return results;
         }
-
     }
 }

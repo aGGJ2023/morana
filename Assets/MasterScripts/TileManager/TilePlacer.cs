@@ -22,6 +22,9 @@ public class TilePlacer : MonoBehaviour
             Vector3Int cellPos = collisionMap.WorldToCell(worldPos);
             TileBase tile = collisionMap.GetTile(cellPos);
 
+            Debug.Log(cellPos);
+            return;
+            
             if (!adhereToPlaceRules | CanPlaceAt(cellPos))
                // TileManager.Instance.chunk.SetValue(cellPos,1);
                 Instantiate(TileObject, worldPos, Quaternion.identity, parent);

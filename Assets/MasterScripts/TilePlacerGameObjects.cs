@@ -23,9 +23,10 @@ public class TilePlacerGameObjects : MonoBehaviour
             Vector3Int cellPos = collisionMap.WorldToCell(worldPos);
             Vector3 worldPosWithCorrectZ = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0f);
             TileBase tile = collisionMap.GetTile(cellPos);
-
+            
             if (!adhereToPlaceRules | CanPlaceAt(cellPos))
             {
+                Debug.Log(cellPos);
                 var gameObjectTile = Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
                 TileManager.Instance.SetTile(cellPos, 1, gameObjectTile);
             }
