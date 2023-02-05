@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ namespace MasterScripts
         public static GameManager Instance;
         public GameObject Seed;
         public GameObject player;
+        public TextMeshProUGUI text;
 
         [SerializeField]
         private int endpointsRequired = 4;

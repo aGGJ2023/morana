@@ -1,6 +1,7 @@
 using MasterScripts;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -69,6 +70,7 @@ public class EnemyManager : MonoBehaviour
     {
        slowEnemyCount--;
         TileAmount++;
+        GameManager.Instance.text.text = TileAmount.ToString();
     }
 
 

@@ -29,6 +29,8 @@ public class TilePlacerGameObjects : MonoBehaviour
                 if (EnemyManager.Instance.TileAmount > 0)
                 {
                     EnemyManager.Instance.TileAmount--;
+                    GameManager.Instance.text.text = EnemyManager.Instance.TileAmount.ToString();
+                    
                     Debug.Log(cellPos);
                     var gameObjectTile = Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
                     TileManager.Instance.SetTile(cellPos, 1, gameObjectTile);
