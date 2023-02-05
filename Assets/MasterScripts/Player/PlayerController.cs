@@ -11,12 +11,13 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
-    public float modifierTTL;
+    public float modifierTTL = 2f;
     private float modifierGiven;
 
     //public float runSpeed = 20.0f;
     public float Speed = 1.5f;
-    public float ModifiedSpeed = 1.75f;
+    public float ModifiedSpeed = 2.5f;
+    [SerializeField]
     private float currentSpeed;
 
     void Start()
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * Speed, vertical * Speed);
+        rb.velocity = new Vector2(horizontal * currentSpeed, vertical * Speed);
     }
 
     public void GiveSpeedModifier()
@@ -50,4 +51,7 @@ public class PlayerController : MonoBehaviour
             modifierGiven = Time.time;
         }
     }
+
 }
+
+    

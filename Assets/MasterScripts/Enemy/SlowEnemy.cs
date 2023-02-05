@@ -33,6 +33,10 @@ public class SlowEnemy : MonoBehaviour
     private bool isColliding = false;
     private GameObject target;
 
+    [SerializeField]
+    private float attackTimeDelay = 2f;
+    private float lastTimeAttacked;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,15 +103,29 @@ public class SlowEnemy : MonoBehaviour
             Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
         }
 
-        if (collision.gameObject.CompareTag(TARGET_TAG))
+        if (Time.time - lastTimeAttacked > attackTimeDelay)
         {
-            var handler = collision.gameObject.GetComponent<TileDestroyHandler>();
-            if (handler != null)
+            if (collision.gameObject.CompareTag(SEED_TAG))
             {
-                handler.AttackStarted();
-            }       
-        } 
+                Debug.Log("Damaging seed");
+                var script = target.GetComponent<Seed>();
+                if (script != null)
+                {
+                    script.TakeDamage();
+                }
+            } else if (collision.gameObject.CompareTag(TARGET_TAG))
+            {
+                var handler = collision.gameObject.GetComponent<TileDestroyHandler>();
+                if (handler != null)
+                {
+                    handler.AttackStarted();
+                }
+            }
+
+        }
+
         isColliding = true;
+
     }
 
     // maybe unecessary
@@ -129,5 +147,10 @@ public class SlowEnemy : MonoBehaviour
             Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collider);
             Debug.Log("Physics ignored from OnCollisionEnter2D");
         }
+    }
+
+    void OnDestroy()
+    {
+        EnemyManager.Instance.RemoveEnemy();
     }
 }

@@ -53,7 +53,7 @@ public class EnemyManager : MonoBehaviour
                 lastSpawned = Time.time;
             }
         }
-    }
+    }   
 
     private void SpawnEnemy(GameObject enemy)
     {
@@ -63,6 +63,8 @@ public class EnemyManager : MonoBehaviour
         slowEnemyCount++;
     }
 
+    public void RemoveEnemy()
+    => slowEnemyCount--;
 
     public bool ContainsTarget(GameObject target)
         => targetedTiles.Contains(target);

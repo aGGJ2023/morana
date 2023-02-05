@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Seed : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int hitPoints = 15;
+
+    public void TakeDamage()
     {
-        
+        hitPoints--;
+        if (hitPoints <= 0)
+            Die();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Die()
     {
-        
+        // TODO DEATH LOGIC
+        Debug.Log("Death");
     }
 }

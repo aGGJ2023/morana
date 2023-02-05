@@ -36,8 +36,9 @@ namespace MasterScripts
             Debug.Log($"endpointsConnected: {endpointsConnected}");
             if (endpointsConnected == endpointsRequired)
             {
-                // Win 
                 Debug.Log("Win");
+                // TODO LOAD WIN SCENE
+
             }
         }
         public void EndpointDisconnected()
