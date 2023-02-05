@@ -63,5 +63,10 @@ namespace MasterScripts
             chunk.SetValue(position, value);
             chunk.SetGameObject(position, gameObject);
         }
+
+        public int GetTile(Vector3Int position)
+        {
+            return chunk.GetValue(position);
+        }
     }
 }
