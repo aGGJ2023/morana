@@ -99,7 +99,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b2e9bab12d7e0a749a9d5ee96c07bf4e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -272,7 +272,7 @@ MonoBehaviour:
   EnemyTags:
   - SlowEnemy
   - FastEnemy
-  animator: {fileID: 3322096939005956662}
+  animator: {fileID: 2008723453559769087}
 --- !u!1 &4150832054146531771
 GameObject:
   m_ObjectHideFlags: 0

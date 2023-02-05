@@ -8,6 +8,7 @@ public class MainTreeAnimator : MonoBehaviour
     [SerializeField]Sprite[] treeStateSprites;
      SpriteRenderer spriteRenderer;
     private int index = 0;
+  
 
     private void Start()
     {
