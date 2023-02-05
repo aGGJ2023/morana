@@ -35,4 +35,13 @@ public class TileDestroyHandler : MonoBehaviour
         // check all the neigbhours in another direciton of seed
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+            collision.gameObject.GetComponent<PlayerController>().GiveSpeedModifier();
+        }
+    }
+
 }

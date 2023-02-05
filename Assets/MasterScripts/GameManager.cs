@@ -32,8 +32,8 @@ namespace MasterScripts
 
         public void EndpointConnected()
         {
-            Debug.Log($"endpointsConnected: {endpointsConnected}");
             endpointsConnected++;
+            Debug.Log($"endpointsConnected: {endpointsConnected}");
             if (endpointsConnected == endpointsRequired)
             {
                 // Win 
