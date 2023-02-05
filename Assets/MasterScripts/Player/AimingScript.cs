@@ -9,7 +9,6 @@ public class AimingScript : MonoBehaviour
     [SerializeField] private Transform center;
 
     [SerializeField] float rotationSpeed = 2f;
-    [SerializeField] GameObject objectToSpawn;
     [SerializeField] Transform spawnPosition;
 
     // Update is called once per frame
@@ -21,18 +20,9 @@ public class AimingScript : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            setObjectToSpawn();
-        }
+       
         // aimingDot.Rotate((Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse Y") * RotationSpeed * Time.deltaTime), 0, Space.World);
         // transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position) * Quaternion.Euler(0, 0, 90);
     }
-    public void setObjectToSpawn()
-    {
-        if (objectToSpawn !=null)
-        {
-            Instantiate(objectToSpawn, spawnPosition.position, Quaternion.identity);
-        }
-    }
+    
 }

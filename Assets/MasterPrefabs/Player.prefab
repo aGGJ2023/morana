@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 4150832053334598600}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6b81bce5bf20a424d9f222c1d9b93ca1, type: 2}
+  m_Controller: {fileID: 9100000, guid: b2e9bab12d7e0a749a9d5ee96c07bf4e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 4150832053742237965}
   - component: {fileID: 4150832053742237967}
   - component: {fileID: 4150832053742237963}
+  - component: {fileID: 8939598130498847376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Root
@@ -227,6 +228,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1.5
+--- !u!114 &8939598130498847376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150832053742237953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1da14f9597b3064780e4bdc178bcb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPosition: {fileID: 4150832054146531770}
+  checkRadious: 1
+  EnemyTags:
+  - Root
+  animator: {fileID: 4998624391183304284}
 --- !u!1 &4150832054146531771
 GameObject:
   m_ObjectHideFlags: 0
