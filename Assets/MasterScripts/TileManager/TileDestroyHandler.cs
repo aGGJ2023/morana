@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MasterScripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ public class TileDestroyHandler : MonoBehaviour
     {
         EnemyManager.Instance.RemoveTarget(gameObject);
         Destroy(gameObject);
+        TileManager.Instance.RemoveTile(gameObject.transform.position);
         // check all the neigbhours in another direciton of seed
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,6 +15,7 @@ namespace MasterScripts
         private int _chunkOffsetHeight;
 
         int[,] _tileData;
+        GameObject[,] _tileGameObject;
 
         public TileChunk(
             int width,
@@ -45,6 +47,7 @@ namespace MasterScripts
             this._chunkOffsetHeight = chunkOffsetHeight;
 
             this._tileData = new int[width, height];
+            this._tileGameObject = new GameObject[width, height];
         }
 
         private Vector3Int GetPosition(int x, int y)
@@ -67,12 +70,24 @@ namespace MasterScripts
             ;
         }
 
+        public GameObject GetGameObject(Vector3Int position)
+        {
+            int[] index = GetIndex(position);
+            return _tileGameObject[index[0], index[1]];
+        }
+        
+        public void SetGameObject(Vector3Int position, GameObject value)
+        {
+            int[] index = GetIndex(position);
+            _tileGameObject[index[0], index[1]] = value;
+        }
+        
         public void SetValue(Vector3Int position, int value)
         {
             int[] index = GetIndex(position);
             _tileData[index[0], index[1]] = value;
         }
-        
+
         public int GetValue(Vector3Int position)
         {
             int[] index = GetIndex(position);
@@ -90,6 +105,47 @@ namespace MasterScripts
                 else if (_tileData[i, j] == 2)
                     TileManager.Instance.collisionMap.SetTile(
                         GetPosition(i, j), TileManager.Instance.sourceTile);
+                else
+                    TileManager.Instance.collisionMap.SetTile(
+                        GetPosition(i, j), null);
         }
+
+        private bool[,] visited;
+
+        void DFS(int x, int y)
+        {
+            visited[x, y] = true;
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (i == 0 && j == 0) continue;
+                    int nx = x + i;
+                    int ny = y + j;
+                    if (nx >= 0 && nx < _width && ny >= 0 && ny < _height && _tileData[nx, ny] == 1 && !visited[nx, ny]) {
+                        DFS(nx, ny);
+                    }
+                }
+            }
+        }
+
+        public List<Vector3Int> GetUnconnectedTiles() {
+            List<Vector3Int> results = new List<Vector3Int>();
+            visited = new bool[_width, _height];
+            for (int i = 0; i < _width; i++) {
+                for (int j = 0; j < _height; j++) {
+                    visited[i, j] = false;
+                }
+            }
+            DFS(_width / 2, _height / 2);
+            for (int i = 0; i < _width; i++) {
+                for (int j = 0; j < _height; j++) {
+                    if (!visited[i, j] && _tileData[i, j] > 0 ){
+                        results.Add(GetPosition(i, j));
+                    }
+                }
+            }
+
+            return results;
+        }
+
     }
 }

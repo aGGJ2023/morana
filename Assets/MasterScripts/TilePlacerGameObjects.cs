@@ -26,8 +26,9 @@ public class TilePlacerGameObjects : MonoBehaviour
 
             if (!adhereToPlaceRules | CanPlaceAt(cellPos))
             {
-                TileManager.Instance.chunk.SetValue(cellPos, 1);
-                Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
+                var gameObjectTile = Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
+                TileManager.Instance.SetTile(cellPos, 1, gameObjectTile);
+                
             }
         }
     }
