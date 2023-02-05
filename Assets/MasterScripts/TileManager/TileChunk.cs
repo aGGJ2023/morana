@@ -166,5 +166,22 @@ namespace MasterScripts
 
             return results;
         }
+
+        int GetItemCount(int item)
+        {
+            int count = 0;
+            for (int i = 0; i < _width; i++)
+            {
+                for (int j = 0; j < _height; j++)
+                {
+                    if (_tileData[i, j] == item)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
     }
 }
