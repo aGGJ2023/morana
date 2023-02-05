@@ -15,7 +15,7 @@ namespace MasterScripts
         public Tile endpointTile;
         public TileChunk chunk = new(18, 10, 0, 0, true);
         public float maxDistance = 7f;
-        
+
         void Awake()
         {
             if (Instance != null)
@@ -31,6 +31,29 @@ namespace MasterScripts
         private void Update()
         {
             chunk.RunUpdate();
+        }
+
+        public void RemoveTile(Vector3 tileGameObjectPosition)
+        {
+            Vector3Int cellPos = collisionMap.WorldToCell(tileGameObjectPosition);
+            chunk.SetValue(cellPos, 0);
+            var tiles = chunk.GetUnconnectedTiles();
+
+            foreach (var vector3Int in tiles)
+            {
+                chunk.SetValue(cellPos, 0);
+                var gameObject = chunk.GetGameObject(vector3Int);
+                EnemyManager.Instance.RemoveTarget(gameObject);
+                Destroy(gameObject);
+            }
+
+            // Vector3 worldPosWithCorrectZ = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0f);
+        }
+
+        public void SetTile(Vector3Int position, int value, GameObject gameObject)
+        {
+            chunk.SetValue(position, value);
+            chunk.SetGameObject(position, gameObject);
         }
     }
 }
