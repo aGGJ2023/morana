@@ -76,3 +76,7 @@ crashlytics-build.properties
 
 # Rider
 .idea
+Assets/Sprites/Background/background.psd.meta
+Assets/Sprites/Enemy/background.psd.meta
+Assets/Sprites/Background.meta
+Assets/Sprites/Background/background.png.meta
