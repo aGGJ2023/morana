@@ -30,9 +30,10 @@ public class TileDestroyHandler : MonoBehaviour
     public void DestroyTile()
     {
         EnemyManager.Instance.RemoveTarget(gameObject);
-        Destroy(gameObject);
         TileManager.Instance.RemoveTile(gameObject.transform.position);
+        Destroy(gameObject);
         // check all the neigbhours in another direciton of seed
+        // no i don't think i will
     }
 
 }

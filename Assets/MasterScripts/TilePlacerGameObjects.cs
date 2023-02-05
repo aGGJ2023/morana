@@ -28,7 +28,6 @@ public class TilePlacerGameObjects : MonoBehaviour
             {
                 var gameObjectTile = Instantiate(TileObject, worldPosWithCorrectZ, Quaternion.identity, parent);
                 TileManager.Instance.SetTile(cellPos, 1, gameObjectTile);
-                
             }
         }
     }
@@ -44,10 +43,10 @@ public class TilePlacerGameObjects : MonoBehaviour
         Vector3 playerPosition = GameManager.Instance.player.transform.position;
 
         // returns false when the player is too far away
-        if (Vector3.Distance(tileCenter,playerPosition) 
+        if (Vector3.Distance(tileCenter, playerPosition)
             > TileManager.Instance.maxDistance)
             return false;
-        
+
         // returns true if current tile has valid neighbors
         for (int x = -1; x < 2; x++)
         for (int y = -1; y < 2; y++)
