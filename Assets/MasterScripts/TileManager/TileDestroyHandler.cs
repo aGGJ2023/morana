@@ -12,7 +12,6 @@ public class TileDestroyHandler : MonoBehaviour
 
     public void AttackStarted()
     {
-        Debug.Log($"Attack started! {Time.time}");
         lastAttacked = Time.time;
     }
 

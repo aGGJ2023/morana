@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     // Place this script inside attackEnemy position in Player prefab that needs a circle collider 
     [SerializeField] Transform checkPosition;
     [SerializeField] float checkRadious=1;
-    [SerializeField] string[] EnemyTags;
+    [SerializeField] string[] EnemyTags = { "SlowEnemy", "FastEnemy" };
     [SerializeField] Animator animator;
     void Start()
     {
@@ -33,17 +33,11 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (hitObject.gameObject.CompareTag(tag))
                 {
-                    //BORNA CHANGE THIS TO YOUR CLASS
-                    if(hitObject.GetComponent<Enemy>() != null)
-                    {
-                        Debug.Log("we hit enemy with class");
-                        //hitObject.GetComponent<Enemy>.Hurt()
-                    }
+                    var script = hitObject.GetComponent<SlowEnemy>();
+                    if (hitObject.GetComponent<SlowEnemy>() != null)
+                        script.Hurt();
                 }
-              
-
             }
-            Debug.Log("We hit" + hitObject.gameObject.name);
 
         
         }

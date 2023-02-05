@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Root
   - Tile
+  - SlowEnemy
+  - Seed
   layers:
   - Default
   - TransparentFX

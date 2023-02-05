@@ -14,6 +14,10 @@ public class SlowEnemy : MonoBehaviour
     private string TARGET_TAG = "Tile";
     [SerializeField]
     private string PLAYER_TAG = "Player";
+    [SerializeField]
+    private string SLOW_ENEMY_TAG = "SlowEnemy";
+    [SerializeField]
+    private string SEED_TAG = "Seed";
 
     //if data isnt set this is default data
     [SerializeField]
@@ -45,12 +49,14 @@ public class SlowEnemy : MonoBehaviour
 
     private void MoveToTarget() 
     {
-        if (target.IsDestroyed())
+        if (target == null)
+            target = FindTarget();
+        else if (target.IsDestroyed())
             target = FindTarget();
 
         transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
-    private void SetEnemyValues()
+    private void SetEnemyValues()   
     {
         GetComponent<Health>().SetHealth(data.hp, data.hp);
         damage = data.damage;
@@ -62,7 +68,7 @@ public class SlowEnemy : MonoBehaviour
         var marks = GameObject.FindGameObjectsWithTag(TARGET_TAG);
         if (marks.Length == 0)
         {
-            return GameObject.FindGameObjectWithTag(PLAYER_TAG);
+            return GameObject.FindGameObjectWithTag(SEED_TAG);
         }
         var nearest = marks[0];
         var distance = Vector2.Distance(transform.position, nearest.transform.position);
@@ -81,8 +87,18 @@ public class SlowEnemy : MonoBehaviour
         return nearest;
     }
 
+    public void Hurt()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag(SLOW_ENEMY_TAG))
+        {
+            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider);
+        }
+
         if (collision.gameObject.CompareTag(TARGET_TAG))
         {
             var handler = collision.gameObject.GetComponent<TileDestroyHandler>();
@@ -107,6 +123,11 @@ public class SlowEnemy : MonoBehaviour
         if (collider.GetComponent<Health>() != null)
         {
             collider.GetComponent<Health>().Damage(damage);
+        }
+        if(collider.gameObject.CompareTag(SLOW_ENEMY_TAG))
+        {
+            Physics2D.IgnoreCollision(gameObject.GetComponent<BoxCollider2D>(), collider);
+            Debug.Log("Physics ignored from OnCollisionEnter2D");
         }
     }
 }
