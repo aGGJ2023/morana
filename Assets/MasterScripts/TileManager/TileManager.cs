@@ -25,7 +25,7 @@ namespace MasterScripts
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
         private void Update()

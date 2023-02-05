@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
                 if (hitObject.gameObject.CompareTag(tag))
                 {
                     //BORNA CHANGE THIS TO YOUR CLASS
-                    if(hitObject.GetComponent<Enemy>() != null)
+                    //if(hitObject.GetComponent<Enemy>() != null)
                     {
                         Debug.Log("we hit enemy with class");
                         //hitObject.GetComponent<Enemy>.Hurt()
