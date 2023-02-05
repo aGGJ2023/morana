@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour
         if (Instance != null)
         {
             Destroy(gameObject);
+            
             return;
         }
 

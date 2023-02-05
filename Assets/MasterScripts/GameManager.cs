@@ -19,13 +19,14 @@ namespace MasterScripts
         [SerializeField]
         private int endpointsRequired = 4;
 
-        private int endpointsConnected = 0;
+        public int endpointsConnected = 0;
 
         void Awake()
         {
             if (Instance != null) 
             {
                 Destroy(gameObject);
+                
                 return;
             }
 
@@ -41,6 +42,9 @@ namespace MasterScripts
             {
                 Debug.Log("Win");
                 // TODO LOAD WIN SCENE
+                
+                EnemyManager.Instance.TileAmount = 0;
+                endpointsConnected = 0;
                 SceneManager.LoadScene("MainScene");
 
             }

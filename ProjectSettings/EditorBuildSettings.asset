@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MasterScenes/EnemyScene.unity
     guid: 9c022db2a135c9246bbf4f5ae7a66bf9
+  - enabled: 1
+    path: Assets/MainScene.unity
+    guid: 6a9ff4bfb2a154335aaa1c005a91c4f0
   m_configObjects: {}

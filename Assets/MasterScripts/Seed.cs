@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MasterScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,8 @@ public class Seed : MonoBehaviour
     private void Die()
     {
         // TODO DEATH LOGIC
+        EnemyManager.Instance.TileAmount = 0;
+        GameManager.Instance.endpointsConnected = 0;
         Debug.Log("Death");
         SceneManager.LoadScene("TileScene");
     }
