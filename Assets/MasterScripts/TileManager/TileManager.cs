@@ -15,6 +15,7 @@ namespace MasterScripts
         public Tile endpointTile;
         public TileChunk chunk = new(18, 10, 0, 0, true);
         public float maxDistance = 7f;
+        public bool DeleteUnconnectedTiles;
 
         void Awake()
         {
@@ -37,15 +38,22 @@ namespace MasterScripts
         {
             Vector3Int cellPos = collisionMap.WorldToCell(tileGameObjectPosition);
             chunk.SetValue(cellPos, 0);
-            var tiles = chunk.GetUnconnectedTiles();
 
-            foreach (var vector3Int in tiles)
+            // not worky very well
+            if (DeleteUnconnectedTiles)
             {
-                chunk.SetValue(cellPos, 0);
-                var gameObject = chunk.GetGameObject(vector3Int);
-                EnemyManager.Instance.RemoveTarget(gameObject);
-                Destroy(gameObject);
+                var tiles = chunk.GetUnconnectedTiles();
+
+                foreach (var vector3Int in tiles)
+                {
+                    chunk.SetValue(vector3Int, 0);
+                    var gameObject = chunk.GetGameObject(vector3Int);
+                    chunk.SetGameObject(vector3Int, null);
+                    EnemyManager.Instance.RemoveTarget(gameObject);
+                    Destroy(gameObject);
+                }
             }
+
 
             // Vector3 worldPosWithCorrectZ = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0f);
         }
