@@ -22,7 +22,7 @@ namespace MasterScripts
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+          //  DontDestroyOnLoad(gameObject);
         }
 
         public Vector3 GetSeedLocation()
