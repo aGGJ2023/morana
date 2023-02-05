@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Seed : MonoBehaviour
 {
@@ -19,5 +20,6 @@ public class Seed : MonoBehaviour
     {
         // TODO DEATH LOGIC
         Debug.Log("Death");
+        SceneManager.LoadScene("TileScene");
     }
 }
