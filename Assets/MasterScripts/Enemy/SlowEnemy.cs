@@ -107,7 +107,7 @@ public class SlowEnemy : MonoBehaviour
         {
             if (collision.gameObject.CompareTag(SEED_TAG))
             {
-                Debug.Log("Damaging seed");
+              
                 var script = target.GetComponent<Seed>();
                 if (script != null)
                 {

@@ -26,7 +26,9 @@ public class EnemyManager : MonoBehaviour
     private int fastEnemyCount = 0;
     private int burst = 2;
     private float lastSpawned = 0;
-    
+
+    public int TileAmount = 0;
+
 
     void Awake()
     {
@@ -53,7 +55,7 @@ public class EnemyManager : MonoBehaviour
                 lastSpawned = Time.time;
             }
         }
-    }   
+    }
 
     private void SpawnEnemy(GameObject enemy)
     {
@@ -64,7 +66,11 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void RemoveEnemy()
-    => slowEnemyCount--;
+    {
+       slowEnemyCount--;
+        TileAmount++;
+    }
+
 
     public bool ContainsTarget(GameObject target)
         => targetedTiles.Contains(target);

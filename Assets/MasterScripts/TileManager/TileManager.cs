@@ -60,8 +60,10 @@ namespace MasterScripts
 
         public void SetTile(Vector3Int position, int value, GameObject gameObject)
         {
-            chunk.SetValue(position, value);
-            chunk.SetGameObject(position, gameObject);
+      
+                chunk.SetValue(position, value);
+                chunk.SetGameObject(position, gameObject);
+            
         }
     }
 }
